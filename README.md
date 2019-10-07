@@ -2,8 +2,17 @@
 This project is for introducing how to use the code of the thesis of Deep Learning based Open-World Person Re-Identification.
 
 # Requirements
+* Cuda 9.0
+* CuDnn 7.0
 * Tensorflow 1.10
 * Python 3.6
+
+## Installation
+You have first to install Cuda 9.0 and CuDnn 7.0 manually. they are required for gpu version of tensorflow.
+For python packages we need, you can install them by:
+```bash
+pip install -r requirements.txt
+```
 
 # Usage
 
