@@ -27,16 +27,22 @@ year={2012},
 pages={2650-2657},
 }
 ```
-to partition each dataset into triaining/gallery/query set and store them in different folders. There is not the code or script for partitioning processes because some steps are works down by hand. 
+to partition each dataset into training/gallery/query set and store them in different folders. There is not the code or script for partitioning processes because some steps are works down by hand. 
 
 Next, the format of all images in each folder is transformed to .tfrecord file through the function "create_record" in data/prepare_tfrecords.py
 
-Following the training/testing protocol, 
+Following the training/testing protocol in [zheng2012], you will get 10 group of training/gallery/query set and the correspounding tfrecord file. For your each tfrecord file folder, it should like this:
+```
+├── tfrecord
+   ├── train_market.tfrecords
+   ├── gallery_market.tfrecords
+   └── query_market.tfrecords
+```
 
 ## Training
 After finshing data preparation, you can start training the network by running "train.py":
 ```bash
-python train.py --record_dir "tfrecord files path" \ 
+> python train.py --record_dir "tfrecord files path" \ 
 --dataset "market or duke" \ 
 --device 0 \ 
 --pre_model pretrain/se_resnext50/se_resnext50.ckpt \ 
@@ -52,9 +58,9 @@ The pretrained model can be downloaded from [here](https://drive.google.com/driv
 In each training process, the network training needs to run "train.py" twice. In second time, you have to modify the setting of --pre_model into "the path of last model training in first time" and --learning_rate into 0.0001.
 
 ## Testing 
-After training twice, the last model training in second time will be used to extract features. You need to convert all the gallery and query images into the coresponding feature representataions with "FeatureExtraction.py":
+After training twice, the last model training in second time will be used to extract features. You need to convert all the gallery and query images into the feature representataions with "FeatureExtraction.py":
 ```bash
-python FeatureExtraction.py --record_dir "tfrecord files path" \ 
+> python FeatureExtraction.py --record_dir "tfrecord files path" \ 
 --dataset "market or duke" \ 
 --device 0 \ 
 --feature_dir "the path of storing the output feature representataions"
@@ -67,7 +73,7 @@ python FeatureExtraction.py --record_dir "tfrecord files path" \
 Next, you can calculate TTR/FTR score with those feature representataions through evaluation.py:
 
 ```bash
-python evaluation.py --record_dir "tfrecord files path" \ 
+> python evaluation.py --record_dir "tfrecord files path" \ 
 --dataset "market or duke" \ 
 --feature_dir "the path of stored feature representataions"
 --result_dir "the path of the calculated TTR/FTR score" \
