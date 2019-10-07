@@ -11,7 +11,7 @@ This project is for introducing how to use the code of the thesis of Deep Learni
 You have first to install Cuda 9.0 and CuDnn 7.0 manually. they are required for gpu version of tensorflow.
 For python packages we need, you can install them by:
 ```bash
-pip install -r requirements.txt
+> pip install -r requirements.txt
 ```
 
 # Usage
@@ -31,7 +31,7 @@ to partition each dataset into training/gallery/query set and store them in diff
 
 Next, the format of all images in each folder is transformed to .tfrecord file through the function "create_record" in data/prepare_tfrecords.py
 
-Following the training/testing protocol in [zheng2012], you will get 10 group of training/gallery/query set and the correspounding tfrecord file. For your each tfrecord file folder, it should like this:
+Following the training/testing protocol in [zheng2012], you will get 10 groups of training/gallery/query set and the correspounding tfrecord file. For your each tfrecord file folder, it should like this:
 ```
 ├── tfrecord
    ├── train_market.tfrecords
@@ -57,8 +57,12 @@ The pretrained model can be downloaded from [here](https://drive.google.com/driv
 
 In each training process, the network training needs to run "train.py" twice. In second time, you have to modify the setting of --pre_model into "the path of last model training in first time" and --learning_rate into 0.0001.
 
+Because there are 10 groups of tfrecord file, the training process needs to repeat 10 times.
+
 ## Testing 
-After training twice, the last model training in second time will be used to extract features. You need to convert all the gallery and query images into the feature representataions with "FeatureExtraction.py":
+After training, the last models of each group will be used to extract features. 
+
+You can convert all the gallery and query images in tfrecord files into the feature representataions with "FeatureExtraction.py":
 ```bash
 > python FeatureExtraction.py --record_dir "tfrecord files path" \ 
 --dataset "market or duke" \ 
