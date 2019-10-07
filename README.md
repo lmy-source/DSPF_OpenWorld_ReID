@@ -31,6 +31,8 @@ to partition each dataset into triaining/gallery/query set and store them in dif
 
 Next, the format of all images in each folder is transformed to .tfrecord file through the function "create_record" in data/prepare_tfrecords.py
 
+Following the training/testing protocol, 
+
 ## Training
 After finshing data preparation, you can start training the network by running "train.py":
 ```bash
@@ -47,7 +49,7 @@ python train.py --record_dir "tfrecord files path" \
 
 The pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1_kc-ikPhVzjgzWMrcSWMPH0IYTjrqOlY?usp=sharing), and then put them under this path: ./pretrain/se_resnext50/.
 
-The network training needs to run twice. In second time, you have to modify the setting of --pre_model into "the path of last model training in first time" and --learning_rate into 0.0001.
+In each training process, the network training needs to run "train.py" twice. In second time, you have to modify the setting of --pre_model into "the path of last model training in first time" and --learning_rate into 0.0001.
 
 ## Testing 
 After training twice, the last model training in second time will be used to extract features. You need to convert all the gallery and query images into the coresponding feature representataions with "FeatureExtraction.py":
