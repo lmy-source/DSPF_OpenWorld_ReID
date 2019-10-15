@@ -64,8 +64,7 @@ After training, the last models of each group will be used to extract features.
 
 You can convert all the gallery and query images in tfrecord files into the feature representataions with `FeatureExtraction.py`:
 ```bash
-> python FeatureExtraction.py --record_dir "tfrecord files path" \ 
---dataset "market or duke" \ 
+> python FeatureExtraction.py --dataset "market or duke" \ 
 --device 0 \ 
 --feature_dir "the path of storing the output feature representataions"
 --restore_model "the path of the last model training in second time" \
