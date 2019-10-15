@@ -8,7 +8,7 @@ This project is for introducing how to use the code of the thesis of Deep Learni
 * Python 3.6
 
 ## Installation
-You have first to install Cuda 9.0 and CuDnn 7.0 manually. they are required for gpu version of tensorflow.
+You have first to install `Cuda 9.0` and `CuDnn 7.0` manually, which are required for gpu version of tensorflow.
 For python packages we need, you can install them by:
 ```bash
 > pip install -r requirements.txt
@@ -17,7 +17,7 @@ For python packages we need, you can install them by:
 # Usage
 
 ## Dataset Preparation
-We use Market-1501 and DukeMTMC-reID datasets for performance evaluation. For open-world ReID settings, we follow the training/testing protocol proposed in paper
+We use `Market-1501` and `DukeMTMC-reID` datasets for performance evaluation. For open-world ReID settings, we follow the training/testing protocol proposed in paper
 ```
 @INPROCEEDINGS{zheng2012,
 author={W. {Zheng} and S. {Gong} and T. {Xiang}},
@@ -29,7 +29,7 @@ pages={2650-2657},
 ```
 to partition each dataset into training/gallery/query set and store them in different folders. There is not the code or script for partitioning processes because some steps are works down by hand. 
 
-Next, the format of all images in each folder is transformed to .tfrecord file through the function "create_record" in data/prepare_tfrecords.py
+Next, the format of all images in each folder is transformed to .tfrecord file through the function `create_record` in `data/prepare_tfrecords.py`
 
 Following the training/testing protocol in [zheng2012], you will get 10 groups of training/gallery/query set and the correspounding tfrecord file. For your each tfrecord file folder, it should like this:
 ```
@@ -40,7 +40,7 @@ Following the training/testing protocol in [zheng2012], you will get 10 groups o
 ```
 
 ## Training
-After finshing data preparation, you can start training the network by running "train.py":
+After finshing data preparation, you can start training the network by running `train.py`:
 ```bash
 > python train.py --record_dir "tfrecord files path" \ 
 --dataset "market or duke" \ 
@@ -55,14 +55,14 @@ After finshing data preparation, you can start training the network by running "
 
 The pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1_kc-ikPhVzjgzWMrcSWMPH0IYTjrqOlY?usp=sharing), and then put them under this path: ./pretrain/se_resnext50/.
 
-In each training process, the network training needs to run "train.py" twice. In second time, you have to modify the setting of --pre_model into "the path of last model training in first time" and --learning_rate into 0.0001.
+In each training process, the network training needs to run `train.py` twice. In second time, you have to modify the setting of --pre_model into "the path of last model training in first time" and --learning_rate into 0.0001.
 
 Because there are 10 groups of tfrecord file, the training process needs to repeat 10 times.
 
 ## Testing 
 After training, the last models of each group will be used to extract features. 
 
-You can convert all the gallery and query images in tfrecord files into the feature representataions with "FeatureExtraction.py":
+You can convert all the gallery and query images in tfrecord files into the feature representataions with `FeatureExtraction.py`:
 ```bash
 > python FeatureExtraction.py --record_dir "tfrecord files path" \ 
 --dataset "market or duke" \ 
@@ -74,7 +74,7 @@ You can convert all the gallery and query images in tfrecord files into the feat
 --attention --deeplysupervised --part
 ```
 
-Next, you can calculate TTR/FTR score with those feature representataions through evaluation.py:
+Next, you can calculate TTR/FTR score with those feature representataions through `evaluation.py`:
 
 ```bash
 > python evaluation.py --record_dir "tfrecord files path" \ 
@@ -84,6 +84,9 @@ Next, you can calculate TTR/FTR score with those feature representataions throug
 --iteration 10 \ 
 --normalize_feat
 ```
+
+# EE3F dataset
+We set up a small area camera networks with three cameras that cover corridor and passages on the third floor of EECS building at TaiwanTech. Dataset containing videos from the three cameras was collected and labeled.
 
 # References
 - [Se-ResNeXt-50 pretrained model](https://github.com/HiKapok/TF-SENet)
