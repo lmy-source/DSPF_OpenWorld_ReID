@@ -17,7 +17,7 @@ For python packages we need, you can install them by:
 # Usage
 
 ## Dataset Preparation
-We use `Market-1501` and `DukeMTMC-reID` datasets for performance evaluation. The datasets can be downloaded from [here](https://drive.google.com/file/d/1QpcheGYb_tbdmiDI8nvRTQoqc-E5pOvw/view). For open-world ReID settings, we follow the training/testing protocol proposed in paper:
+We use `Market-1501` and `DukeMTMC-reID` datasets for performance evaluation. The datasets can be downloaded from [here](https://drive.google.com/file/d/1QpcheGYb_tbdmiDI8nvRTQoqc-E5pOvw/view). For open-world ReID settings, we follow the training/testing protocol proposed in this paper:
 ```
 @INPROCEEDINGS{zheng2012,
 author={W. {Zheng} and S. {Gong} and T. {Xiang}},
