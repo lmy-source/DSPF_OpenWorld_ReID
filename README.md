@@ -17,7 +17,7 @@ For python packages we need, you can install them by:
 # Usage
 
 ## Dataset Preparation
-We use `Market-1501` and `DukeMTMC-reID` datasets for performance evaluation. For open-world ReID settings, we follow the training/testing protocol proposed in paper
+We use `Market-1501` and `DukeMTMC-reID` datasets for performance evaluation. The datasets can be downloaded from [here](https://drive.google.com/file/d/1QpcheGYb_tbdmiDI8nvRTQoqc-E5pOvw/view). For open-world ReID settings, we follow the training/testing protocol proposed in paper:
 ```
 @INPROCEEDINGS{zheng2012,
 author={W. {Zheng} and S. {Gong} and T. {Xiang}},
@@ -27,7 +27,7 @@ year={2012},
 pages={2650-2657},
 }
 ```
-to partition each dataset into training/gallery/query set and store them in different folders. There is not the code or script for partitioning processes because some steps are works down by hand. 
+to partition each dataset into training/gallery/query set and store them in different folders. There is not the code or script for partitioning processes because some steps are works down by hand.
 
 Next, the format of all images in each folder is transformed to .tfrecord file through the function `create_record` in `data/prepare_tfrecords.py`
 
@@ -53,11 +53,11 @@ After finshing data preparation, you can start training the network by running `
 --attention --deeplysupervised --part
 ```
 
-The pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1_kc-ikPhVzjgzWMrcSWMPH0IYTjrqOlY?usp=sharing), and then put them under this path: ./pretrain/se_resnext50/.
+The pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1_kc-ikPhVzjgzWMrcSWMPH0IYTjrqOlY?usp=sharing), and then put them under this path: `./pretrain/se_resnext50/`.
 
 In each training process, the network training needs to run `train.py` twice. In second time, you have to modify the setting of --pre_model into "the path of last model training in first time" and --learning_rate into 0.0001.
 
-Because there are 10 groups of tfrecord file, the training process needs to repeat 10 times.
+Because there are 10 groups of tfrecord files, the training process needs to repeat 10 times.
 
 ## Testing 
 After training, the last models of each group will be used to extract features. 
@@ -73,7 +73,7 @@ You can convert all the gallery and query images in tfrecord files into the feat
 --attention --deeplysupervised --part
 ```
 
-Next, you can calculate TTR/FTR score with those feature representataions through `evaluation.py`:
+Next, you can calculate TTR/FTR score with those extracted feature representataions through `evaluation.py`:
 
 ```bash
 > python evaluation.py --record_dir "tfrecord files path" \ 
