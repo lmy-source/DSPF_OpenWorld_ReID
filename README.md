@@ -42,7 +42,7 @@ Following the training/testing protocol in [zheng2012], you will get 10 groups o
 ## Training
 After finshing data preparation, you can start training the network by running `train.py`:
 ```bash
-> python train.py --record_dir "tfrecord files path" \ 
+> python train.py --record_dir "the path of training tfrecord files" \ 
 --dataset "market or duke" \ 
 --device 0 \ 
 --pre_model pretrain/se_resnext50/se_resnext50.ckpt \ 
@@ -64,7 +64,8 @@ After training, the last models of each group will be used to extract features.
 
 You can convert all the gallery and query images in tfrecord files into the feature representataions with `FeatureExtraction.py`:
 ```bash
-> python FeatureExtraction.py --dataset "market or duke" \ 
+> python FeatureExtraction.py --record_dir "the path of gallery and query tfrecord files" \ 
+--dataset "market or duke" \ 
 --device 0 \ 
 --feature_dir "the path of storing the output feature representataions"
 --restore_model "the path of the last model training in second time" \
@@ -76,8 +77,7 @@ You can convert all the gallery and query images in tfrecord files into the feat
 Next, you can calculate TTR/FTR score with those extracted feature representataions through `evaluation.py`:
 
 ```bash
-> python evaluation.py --record_dir "tfrecord files path" \ 
---dataset "market or duke" \ 
+> python evaluation.py --record_dir --dataset "market or duke" \ 
 --feature_dir "the path of stored feature representataions"
 --result_dir "the path of the calculated TTR/FTR score" \
 --iteration 10 \ 
