@@ -84,8 +84,6 @@ Next, you can calculate TTR/FTR score with those feature representataions throug
 --normalize_feat
 ```
 
-# EE3F dataset
-We set up a small area camera networks with three cameras that cover corridor and passages on the third floor of EECS building at TaiwanTech. Dataset containing videos from the three cameras was collected and labeled.
 
 # References
 - [Se-ResNeXt-50 pretrained model](https://github.com/HiKapok/TF-SENet)
